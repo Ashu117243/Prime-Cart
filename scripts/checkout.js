@@ -24,7 +24,7 @@ products.forEach((product) =>{
 
 
 const deliveryOptionId = cartItem.deliveryOptionId;
-console.log(deliveryOptionId);
+
 let deliveryOption;
 
 deliveryOptions.forEach( (option)=>{
@@ -36,6 +36,7 @@ if(option.id==deliveryOptionId){
 
 const today = dayjs();
 const deliveryDate = today.add( deliveryOption.deliveryDays , 'days');
+console.log( deliveryOption.deliveryDays);
 const dateString = deliveryDate.format('dddd, MMMM D');
 
 
@@ -43,7 +44,7 @@ const dateString = deliveryDate.format('dddd, MMMM D');
 <div class="cart-item-container
  js-item-container-${matchingProduct.id}">
     <div class="delivery-date">
-      Delivery date: ${dateString} 
+      Delivery date: '' 
     </div>
 
     <div class="cart-item-details-grid">
@@ -74,7 +75,7 @@ const dateString = deliveryDate.format('dddd, MMMM D');
         <div class="delivery-options-title">
           Choose a delivery option:
         </div>
-        ${deliveryOptionsHTML(matchingProduct ,cartItem)}
+        ${ deliveryOptionsHTML(matchingProduct ,cartItem)}
       </div>
     </div>
   </div>
