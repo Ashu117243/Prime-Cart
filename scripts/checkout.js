@@ -1,4 +1,4 @@
-import {cart,removeFromCart} from '../data/cart.js';
+import {cart,removeFromCart , updateDeliveryOption} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrenccy } from './utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
@@ -44,7 +44,7 @@ const dateString = deliveryDate.format('dddd, MMMM D');
 <div class="cart-item-container
  js-item-container-${matchingProduct.id}">
     <div class="delivery-date">
-      Delivery date: '' 
+      Delivery date: ${dateString} 
     </div>
 
     <div class="cart-item-details-grid">
@@ -61,7 +61,7 @@ const dateString = deliveryDate.format('dddd, MMMM D');
         <div class="product-quantity">
           <span>
             Quantity: <span class="quantity-label">${cartItem.quantity}</span>
-          </span>
+          </span> 
           <span class="update-quantity-link link-primary">
             Update
           </span>
@@ -103,7 +103,9 @@ cartItem.deliveryOptionId;
   
 
 html +=
-  `     <div class="delivery-option">
+  `     <div class="delivery-option js-delivery-option"
+        data-product-id="${matchingProduct.id}"
+        data-delivery-option-id="${deliveryOption.id}">
           <input type="radio" 
            ${isChecked ? 'checked' : ''}
             class="delivery-option-input"
@@ -138,5 +140,12 @@ document.querySelectorAll('.js-delete-link')
   container.remove();
   });
 
+});
 
-})
+document.querySelectorAll('.js-delivery-option')
+.forEach( (element) => {
+  element.addEventListener('click' , ()  => {
+const {productId , deliveryOptionId} = element.dataset;
+    updateDeliveryOption(productId , deliveryOptionId)
+  });
+} );
