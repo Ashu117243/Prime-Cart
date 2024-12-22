@@ -26,7 +26,7 @@ let shippingPriceCents = 0;
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${cart.quantity}):</div>
             <div class="payment-summary-money">$${formatCurrenccy(productPriceCents)}</div>
           </div>
 
